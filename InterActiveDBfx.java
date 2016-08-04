@@ -18,6 +18,7 @@
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -37,6 +38,9 @@ public class InterActiveDBfx extends Application {
         bp.setTop(tf);
         TableView tv = new TableView();
         bp.setCenter(tv);
+        
+        TableColumn col = new TableColumn("Name");
+        tv.getColumns().add(col);
         
         Scene sc = new Scene(bp,400,200);
         stage.setScene(sc);
