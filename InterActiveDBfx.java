@@ -15,11 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -31,6 +35,15 @@ public class InterActiveDBfx extends Application {
     
     @Override
     public void start(Stage stage) {
+        BorderPane bp = new BorderPane();
+        TextField tf = new TextField("Select * from Worker");
+        bp.setTop(tf);
+        TableView tv = new TableView();
+        bp.setCenter(tv);
+        
+        Scene sc = new Scene(bp,400,200);
+        stage.setScene(sc);
+        
         stage.setTitle("Hello World!");
         stage.show();
     }
