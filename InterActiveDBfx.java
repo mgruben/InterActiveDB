@@ -32,6 +32,7 @@ public class InterActiveDBfx extends Application {
     @Override
     public void start(Stage stage) {
         BorderPane bp = new BorderPane();
+        
         TextField tf = new TextField("Select * from Worker");
         bp.setTop(tf);
         TableView tv = new TableView();
