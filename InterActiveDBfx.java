@@ -73,8 +73,8 @@ public class InterActiveDBfx extends Application {
         
         TextField tf = new TextField("Select * from Worker");
         bp.setTop(tf);
-        TableView tv = new TableView();
-        bp.setCenter(tv);
+        Table table = new Table();
+        bp.setCenter(table);
         try {
         Class.forName("org.sqlite.JDBC");
 
@@ -90,32 +90,12 @@ public class InterActiveDBfx extends Application {
         ResultSetMetaData rsmd = rs.getMetaData();
         int nCols = rsmd.getColumnCount();
         int[] colType = new int[nCols];
+        String colNames[] = new String[nCols];
+        
         for ( int i=1 ; i<=nCols ; i++ ){
-          String g = rsmd.getColumnName(i).toLowerCase();
-          if (rsmd.getColumnType(i)==java.sql.Types.VARCHAR)
-
-              output += String.format(" %-6s", rsmd.getColumnLabel(i));
-
-
-          else {
-            String fmt="%8s";
-            if (g.endsWith("income")){ colType[i-1]=3;
-            fmt ="%10s";
-            }
-            else if (g.endsWith("id")){ colType[i-1]=4;
-               fmt="%-4s";
-            }
-            else if (g.endsWith("wage"));
-            else if (g.endsWith("age")){ colType[i-1]=5;
-               fmt="%4s";
-            }
-
-
-
-
-            output += String.format(fmt,rsmd.getColumnLabel(i)) ;
-          }
+          colNames[i-1] = rsmd.getColumnName(i);
         }
+        table.load(colNames);
         // get row information
         NumberFormat nf = DecimalFormat.getCurrencyInstance();
         nf.setMaximumFractionDigits(0);
