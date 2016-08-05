@@ -102,7 +102,7 @@ public class InterActiveDBfx extends Application {
         NumberFormat nf = DecimalFormat.getCurrencyInstance();
         nf.setMaximumFractionDigits(0);
         for ( ; rs.next() ; ) {
-            for ( int i=1 ; i<=nCols ; i++ ) {
+            for (int i=1; i<=nCols; i++) {
                 colNames[i-1] = rs.getString(i);
             }
         table.getItems().add(new DataRow(colNames));
@@ -111,13 +111,13 @@ public class InterActiveDBfx extends Application {
         stmt.close();
         con.close();
         } catch (ClassNotFoundException e){
-          System.err.println("driver error");
-          System.exit(1);
-        } catch (SQLException e){          // display error info, 
-          System.err.println("sql error"); // multiple objects can be 
-          for (; e!=null; e = e.getNextException()) // linked.
-            System.err.println("SQL State "+e.getSQLState()+
-             " Message "+e.getMessage()+" Vendor "+ e.getErrorCode());
+            System.err.println("driver error");
+            System.exit(1);
+        } catch (SQLException e) {          // display error info, 
+            System.err.println("sql error"); // multiple objects can be 
+            for (; e!=null; e = e.getNextException()) // linked.
+                System.err.println("SQL State "+e.getSQLState()+
+                " Message "+e.getMessage()+" Vendor "+ e.getErrorCode());
         }
         
         Scene sc = new Scene(bp,400,200);
