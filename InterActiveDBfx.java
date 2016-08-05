@@ -32,34 +32,31 @@ import javafx.stage.Stage;
 public class InterActiveDBfx extends Application {
     
     class Table extends TableView {
-
-      public void load(String colNames[]) {
-        for (int i = 0; i < colNames.length; i++) {
-          TableColumn <DataRow,String> col = new TableColumn<>(colNames[i]);
-          final int g = i;
-          col.setCellValueFactory(p -> p.getValue().getProperty(g));
-          this.getColumns().add(col);
+        public void load(String colNames[]) {
+            for (int i = 0; i < colNames.length; i++) {
+                TableColumn <DataRow,String> col = new TableColumn<>(colNames[i]);
+                final int g = i;
+                col.setCellValueFactory(p -> p.getValue().getProperty(g));
+                this.getColumns().add(col);
+            }
         }
-      }
     }
 
     class DataRow {
-
-      SimpleObjectProperty data[];
-
-      public DataRow(String strData[]) {
-        data = new SimpleObjectProperty[strData.length];
-        for (int i = 0; i < data.length; i++) {
-          data[i] = new SimpleObjectProperty(strData[i]);
+        SimpleObjectProperty data[];
+            public DataRow(String strData[]) {
+            data = new SimpleObjectProperty[strData.length];
+            for (int i = 0; i < data.length; i++) {
+                data[i] = new SimpleObjectProperty(strData[i]);
+            }
         }
-      }
 
-      public DataRow(SimpleObjectProperty xData[]) {
-        data = xData;
-      }
-      public SimpleObjectProperty getProperty(int i) {
-        return data[i];
-      }
+        public DataRow(SimpleObjectProperty xData[]) {
+            data = xData;
+        }
+        public SimpleObjectProperty getProperty(int i) {
+            return data[i];
+        }
     }
 
     @Override
