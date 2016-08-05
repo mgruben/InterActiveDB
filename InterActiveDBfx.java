@@ -96,6 +96,8 @@ public class InterActiveDBfx extends Application {
           colNames[i-1] = rsmd.getColumnName(i);
         }
         table.load(colNames);
+        
+        
         // get row information
         NumberFormat nf = DecimalFormat.getCurrencyInstance();
         nf.setMaximumFractionDigits(0);
