@@ -73,8 +73,6 @@ public class InterActiveDBfx extends Application {
         tv.getColumns().add(col);
         
         tv.getItems().add("Ram");
-        tv.getItems().add("Joe");
-        tv.getItems().add("Ace");
         
         
         Scene sc = new Scene(bp,400,200);
