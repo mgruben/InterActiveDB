@@ -35,7 +35,7 @@ public class InterActiveDBfx extends Application {
 
       public void load(String colNames[]) {
         for (int i = 0; i < colNames.length; i++) {
-          TableColumn col = new TableColumn<>(colNames[i]);
+          TableColumn <DataRow,String> col = new TableColumn<>(colNames[i]);
           final int g = i;
           col.setCellValueFactory(p -> p.getValue().getProperty(g));
           this.getColumns().add(col);
