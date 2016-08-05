@@ -92,7 +92,7 @@ public class InterActiveDBfx extends Application {
         int[] colType = new int[nCols];
         String colNames[] = new String[nCols];
         
-        for ( int i=1 ; i<=nCols ; i++ ){
+        for ( int i=1 ; i<=nCols ; i++ ) {
           colNames[i-1] = rsmd.getColumnName(i);
         }
         table.load(colNames);
@@ -101,27 +101,12 @@ public class InterActiveDBfx extends Application {
         // get row information
         NumberFormat nf = DecimalFormat.getCurrencyInstance();
         nf.setMaximumFractionDigits(0);
-        for (output+="\n" ; rs.next() ; output+='\n')
-          for ( int i=1 ; i<=nCols ; i++ ){          
-            System.out.println(rsmd.getColumnType(i));
-            switch (rsmd.getColumnType(i)){
-
-                case java.sql.Types.FLOAT:
-
-                     float f = rs.getFloat(i);
-                     if (colType[i-1]==3) output+=String.format("%10s",nf.format(f));
-                     else if (f>1000)  output +=String.format("%8.0f",f);
-                     else output+=String.format("%8.2f",f);
-                     break;
-                case java.sql.Types.VARCHAR:
-                     output += String.format(" %-6s", rs.getString(i));
-                     break;
-                default:
-                  if (colType[i-1]==4) output += String.format("%-4s", rs.getString(i));
-                  else if (colType[i-1]==5) output += String.format("%4s", rs.getString(i));
-                  else output += String.format("%8s", rs.getString(i));
+        for ( ; rs.next() ; ) {
+            for ( int i=1 ; i<=nCols ; i++ ) {
+                colNames[i-1] = rs.getString(i);
             }
-          }
+        table.getItems().add(new DataRow(colNames));
+        }
         rs.close();
         stmt.close();
         con.close();
