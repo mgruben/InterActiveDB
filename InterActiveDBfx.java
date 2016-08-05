@@ -75,41 +75,39 @@ public class InterActiveDBfx extends Application {
         bp.setTop(tf);
         Table table = new Table();
         bp.setCenter(table);
+        
         try {
-        Class.forName("org.sqlite.JDBC");
+            Class.forName("org.sqlite.JDBC");
+            Connection con = DriverManager.getConnection("jdbc:sqlite:sample.db");
 
-        Connection con = DriverManager.getConnection("jdbc:sqlite:sample.db");
+            // create a statement for query
+            Statement stmt = con.createStatement();
+            // execute the query and get resultset
+            ResultSet rs = stmt.executeQuery("Select * from Worker order by id");
 
-        // create a statement for query
-        Statement stmt = con.createStatement();
-        // execute the query and get resultset
-        ResultSet rs = stmt.executeQuery("Select * from Worker order by id");
-        // get column information
-
-        // coltype 0 String 1 int 2 float 3 currency 4 id 
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int nCols = rsmd.getColumnCount();
-        int[] colType = new int[nCols];
-        String colNames[] = new String[nCols];
-        
-        for ( int i=1 ; i<=nCols ; i++ ) {
-          colNames[i-1] = rsmd.getColumnName(i);
-        }
-        table.load(colNames);
-        
-        
-        // get row information
-        NumberFormat nf = DecimalFormat.getCurrencyInstance();
-        nf.setMaximumFractionDigits(0);
-        for ( ; rs.next() ; ) {
-            for (int i=1; i<=nCols; i++) {
-                colNames[i-1] = rs.getString(i);
+            // get column information
+            // coltype 0 String 1 int 2 float 3 currency 4 id 
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int nCols = rsmd.getColumnCount();
+            int[] colType = new int[nCols];
+            String colNames[] = new String[nCols];
+            for ( int i=1 ; i<=nCols ; i++ ) {
+              colNames[i-1] = rsmd.getColumnName(i);
             }
-        table.getItems().add(new DataRow(colNames));
-        }
-        rs.close();
-        stmt.close();
-        con.close();
+            table.load(colNames);
+
+            // get row information
+            NumberFormat nf = DecimalFormat.getCurrencyInstance();
+            nf.setMaximumFractionDigits(0);
+            for ( ; rs.next() ; ) {
+                for (int i=1; i<=nCols; i++) {
+                    colNames[i-1] = rs.getString(i);
+                }
+            table.getItems().add(new DataRow(colNames));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
         } catch (ClassNotFoundException e){
             System.err.println("driver error");
             System.exit(1);
