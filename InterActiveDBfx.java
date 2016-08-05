@@ -92,7 +92,7 @@ public class InterActiveDBfx extends Application {
             int[] colType = new int[nCols];
             String colNames[] = new String[nCols];
             for ( int i=1 ; i<=nCols ; i++ ) {
-              colNames[i-1] = rsmd.getColumnName(i);
+                colNames[i-1] = rsmd.getColumnName(i);
             }
             table.load(colNames);
 
@@ -101,7 +101,11 @@ public class InterActiveDBfx extends Application {
             nf.setMaximumFractionDigits(0);
             for ( ; rs.next() ; ) {
                 for (int i=1; i<=nCols; i++) {
+                    if (i == 4) { // hack-indexing the income column
+                        colNames[i-1] = String.format("%10s", nf.format(rs.getFloat(i)));
+                    } else { 
                     colNames[i-1] = rs.getString(i);
+                    }
                 }
             table.getItems().add(new DataRow(colNames));
             }
