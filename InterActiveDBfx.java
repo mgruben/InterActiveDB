@@ -103,6 +103,8 @@ public class InterActiveDBfx extends Application {
                 for (int i=1; i<=nCols; i++) {
                     if (i == 4) { // hack-indexing the income column
                         colNames[i-1] = String.format("%10s", nf.format(rs.getFloat(i)));
+                    } else if (i >= 5) { // hack-indexing the tailing float columns
+                        colNames[i-1] = String.format("%8.2f", rs.getFloat(i));
                     } else { 
                     colNames[i-1] = rs.getString(i);
                     }
