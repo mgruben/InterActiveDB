@@ -17,7 +17,6 @@
 
 
 import javafx.application.Application;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -68,12 +67,8 @@ public class InterActiveDBfx extends Application {
         TableView tv = new TableView();
         bp.setCenter(tv);
         
-        TableColumn <String,String> col = new TableColumn("Name");
-        col.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue()));
+        TableColumn col = new TableColumn("Name");
         tv.getColumns().add(col);
-        
-        tv.getItems().add("Ram");
-        
         
         Scene sc = new Scene(bp,400,200);
         stage.setScene(sc);
